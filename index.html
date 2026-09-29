@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Men's Vitality Check | Free 2-Minute Quiz</title>
+<meta name="description" content="Answer a few quick questions about your energy, stamina and lifestyle and see whether Virdexis could be a fit for you.">
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --navy: #0f2a4a;
+    --blue: #1a73c9;
+    --blue-dark: #135da6;
+    --ink: #1c2430;
+    --muted: #5b6675;
+    --line: #dfe5ec;
+    --bg: #f3f6f9;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+
+  .topbar {
+    background: var(--navy);
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    padding: 8px 16px;
+    letter-spacing: .02em;
+  }
+
+  .wrap { max-width: 640px; margin: 0 auto; padding: 24px 16px 40px; }
+
+  .hero { text-align: center; margin-bottom: 20px; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--blue);
+    background: #e6f0fa;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: clamp(26px, 6vw, 36px);
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .sub { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; }
+
+  .meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin: 18px 0 22px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .meta svg { width: 16px; height: 16px; color: var(--blue); flex: none; }
+
+  /* Quiz card */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 42, 74, .08);
+    padding: 22px 20px 24px;
+  }
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .progress { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; margin-bottom: 20px; }
+  .progress i { display: block; height: 100%; width: 11%; background: var(--blue); border-radius: 999px; }
+
+  .question { font-size: 21px; font-weight: 700; color: var(--navy); margin-bottom: 16px; line-height: 1.3; }
+
+  .options { display: grid; gap: 10px; }
+  .opt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--white);
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 15px 16px;
+    transition: border-color .15s, background .15s, transform .1s;
+  }
+  .opt:hover, .opt:focus-visible { border-color: var(--blue); background: #f2f8fe; outline: none; }
+  .opt:active { transform: scale(.99); }
+  .opt svg { width: 20px; height: 20px; color: var(--blue); flex: none; }
+
+
+  .card-kicker { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--blue); margin-bottom: 6px; }
+  .gets { list-style: none; display: grid; gap: 12px; margin-bottom: 22px; }
+  .gets li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; }
+  .gets svg { width: 20px; height: 20px; color: #1f9d55; flex: none; margin-top: 2px; }
+  .start {
+    display: block; text-align: center; text-decoration: none;
+    background: #22a447; color: #fff; font-size: 19px; font-weight: 700;
+    padding: 18px 20px; border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(34, 164, 71, .3);
+    transition: background .15s, transform .1s;
+  }
+  .start:hover { background: #1b8a3b; }
+  .start:active { transform: scale(.99); }
+
+  .privacy-note { margin-top: 14px; text-align: center; font-size: 13px; color: var(--muted); }
+
+  /* Product strip */
+  .product {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 28px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+    text-decoration: none;
+  }
+  .product img { width: 130px; height: auto; flex: none; }
+  .product h2 { font-size: 18px; color: var(--navy); margin-bottom: 6px; }
+  .product p { font-size: 15px; color: var(--muted); }
+
+  .steps { margin-top: 28px; }
+  .steps h2 { font-size: 20px; color: var(--navy); margin-bottom: 14px; text-align: center; }
+  .steps ol { list-style: none; display: grid; gap: 12px; }
+  .steps li { display: flex; gap: 14px; align-items: flex-start; font-size: 16px; }
+  .steps li b {
+    flex: none;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    display: grid; place-items: center;
+    font-size: 14px;
+  }
+
+  .cta {
+    display: block;
+    text-align: center;
+    margin-top: 26px;
+    background: var(--blue);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 17px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(26, 115, 201, .3);
+  }
+  .cta:hover { background: var(--blue-dark); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    margin-top: 36px;
+    padding: 22px 16px 30px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  footer .links { margin-bottom: 10px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  footer .links a { text-decoration: underline; cursor: pointer; }
+  footer p { max-width: 600px; margin: 0 auto 8px; }
+
+  @media (max-width: 480px) {
+    .product { flex-direction: column; text-align: center; }
+    .product img { width: 150px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">Free men's vitality check &middot; Takes about 2 minutes</div>
+
+<main class="wrap">
+
+  <section class="hero">
+    <span class="eyebrow">Men over 30</span>
+    <h1>Feeling less energy and drive than you used to?</h1>
+    <p class="sub">Answer a few quick questions about your energy, stamina and lifestyle, and find out whether Virdexis could be a good fit for you.</p>
+  </section>
+
+  <div class="meta">
+    <span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      2 minutes
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+      Private &amp; anonymous
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      Free, no sign-up
+    </span>
+  </div>
+
+  <section class="card" aria-label="Quiz">
+    <p class="card-kicker">9 questions &middot; about 2 minutes</p>
+    <h2 class="question">Your personal vitality check</h2>
+    <ul class="gets">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>How your energy and stamina compare with other men your age</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Which everyday habits may be holding you back</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Whether Virdexis could fit your routine</span></li>
+    </ul>
+    <a class="start go" href="https://www.knownwalk.com/2GT22MM1/24S3MJ5J/">Start the quiz &rarr;</a>
+    <p class="privacy-note">Free &middot; No sign-up &middot; Answers stay anonymous</p>
+  </section>
+
+  <a class="product go" href="https://www.knownwalk.com/2GT22MM1/24S3MJ5J/">
+    <img src="img/virdexis.png" alt="Virdexis dietary supplement bottles" width="512" height="512">
+    <div>
+      <h2>About Virdexis</h2>
+      <p>A daily men's supplement formulated around testosterone support, stamina and healthy circulation. The quiz helps you see if it matches your goals.</p>
+    </div>
+  </a>
+
+  <section class="steps">
+    <h2>How it works</h2>
+    <ol>
+      <li><b>1</b><span>Answer 9 short questions about your age, energy and daily routine.</span></li>
+      <li><b>2</b><span>Get a quick summary based on your answers.</span></li>
+      <li><b>3</b><span>See whether Virdexis could fit your routine, and the current options available in the UK.</span></li>
+    </ol>
+  </section>
+
+  <a class="cta go" href="https://www.knownwalk.com/2GT22MM1/24S3MJ5J/">Start the free quiz &rarr;</a>
+
+</main>
+
+<footer>
+  <div class="links">
+    <a>Privacy Policy</a>
+    <a>Terms of Use</a>
+    <a>Contact</a>
+  </div>
+  <p>This page contains affiliate links. We may receive a commission if you make a purchase, at no extra cost to you.</p>
+  <p>Virdexis is a food supplement and is not intended to diagnose, treat, cure or prevent any disease. Food supplements should not be used as a substitute for a varied, balanced diet and a healthy lifestyle. Individual results may vary. Speak to your GP before use if you take medication or have a medical condition.</p>
+  <p>&copy; <span id="yr">2026</span> Men's Vitality Check</p>
+</footer>
+
+<script>
+  // Passes gclid, UTMs and any other URL params through to the quiz link
+  (function () {
+    var qs = window.location.search.replace(/^\?/, '');
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    if (!qs) return;
+    var links = document.querySelectorAll('a.go');
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute('href');
+      links[i].setAttribute('href', href + (href.indexOf('?') === -1 ? '?' : '&') + qs);
+    }
+  })();
+</script>
+</body>
+</html>
